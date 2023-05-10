@@ -1,2 +1,3 @@
 - Build docker image with pre-installed libs for projects of php and laravel.
 - Tested with PHP 8.2.5 and Laravel 10.
+- Docker hub repository: https://hub.docker.com/r/luongfox/php-laravel

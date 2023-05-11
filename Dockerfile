@@ -17,9 +17,6 @@ RUN mkdir -p /usr/src/php/ext/redis; \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-RUN addgroup -g 1000 www
-RUN adduser -u 1000 www -G www -D
-
 RUN touch /var/log/php.log && chmod 777 /var/log/php.log
 RUN touch /var/log/schedule.log && chmod 777 /var/log/schedule.log
 RUN touch /var/log/queue.log && chmod 777 /var/log/queue.log

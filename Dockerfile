@@ -17,11 +17,5 @@ RUN mkdir -p /usr/src/php/ext/redis; \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-RUN touch /var/log/php.log && chmod 777 /var/log/php.log
-RUN touch /var/log/schedule.log && chmod 777 /var/log/schedule.log
-RUN touch /var/log/queue.log && chmod 777 /var/log/queue.log
-RUN touch /var/log/supervisord.log && chmod 777 /var/log/supervisord.log
-RUN touch /var/run/supervisord.pid && chmod 777 /var/run/supervisord.pid
-
 EXPOSE 9000
 CMD ["php-fpm"]

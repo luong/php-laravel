@@ -1,0 +1,23 @@
+FROM php:8.2.5-fpm
+
+RUN apt-get update && apt-get install -y vim git curl \
+    autoconf g++ libtool make libjpeg-dev libjpeg62-turbo-dev libpng-dev libzip-dev zip jpegoptim \
+    optipng pngquant gifsicle vim unzip git wget supervisor libfreetype6-dev libonig-dev
+
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+RUN docker-php-ext-install gd
+RUN docker-php-ext-install opcache bcmath pdo_mysql mbstring zip exif pcntl
+RUN docker-php-ext-configure opcache --enable-opcache
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+RUN mkdir -p /usr/src/php/ext/redis; \
+	curl -fsSL https://pecl.php.net/get/redis --ipv4 | tar xvz -C "/usr/src/php/ext/redis" --strip 1; \
+	docker-php-ext-install redis;
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+EXPOSE 9000
+CMD ["php-fpm"]

@@ -3,7 +3,8 @@ FROM php:8.2.5-fpm-alpine
 RUN apk update && apk add --update --no-cache \
     autoconf g++ libtool make build-base freetype-dev libpng-dev jpeg-dev \
     libjpeg-turbo-dev freetype-dev oniguruma-dev libzip-dev zip jpegoptim \
-    optipng pngquant gifsicle vim unzip git curl wget mysql-client supervisor
+    optipng pngquant gifsicle vim unzip git curl wget mysql-client \
+    supervisor nodejs npm
 
 RUN rm /var/cache/apk/*
 
